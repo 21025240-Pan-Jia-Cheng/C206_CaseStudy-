@@ -49,7 +49,7 @@ public class TuitionManagement {
 				Helper.line(50, "-");
 				Tuition t = inputRegistration();
 				TuitionManagement.registerTuition(registrationList, t);
-				System.out.println("Successfully Registered a Tuition!");
+		 		System.out.println("Successfully Registered a Tuition!");
 				
 			} else if (option == OPTION_DELETE) {
 				TuitionManagement.deleteRegistration(registrationList);
