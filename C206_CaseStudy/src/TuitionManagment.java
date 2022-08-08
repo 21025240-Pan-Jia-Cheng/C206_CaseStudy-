@@ -7,7 +7,7 @@ public class TuitionManagment {
 	
 	ArrayList<timetable> timetableList = new ArrayList<timetable>();
 	while (option != 4) { 
-
+ 
 		TuitionManagment.menu();
 		option = Helper.readInt("Enter an option > ");
 
