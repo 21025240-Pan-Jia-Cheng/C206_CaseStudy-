@@ -1,4 +1,4 @@
-//TRICIA WONG
+//TRICIA
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
