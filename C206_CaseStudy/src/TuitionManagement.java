@@ -8,7 +8,7 @@ public class TuitionManagement {
 	private static final int OPTION_ADD = 2;
 	private static final int OPTION_VIEW = 1;
 	private static final int OPTION_QUIT = 4;
-
+//Wee Ren
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//ArrayList<Tuition> registrationList = new ArrayList<Tuition>();
