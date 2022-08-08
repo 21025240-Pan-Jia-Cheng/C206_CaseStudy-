@@ -17,7 +17,6 @@ public class Tuition {
 	
 	public static String showVacancy(boolean status) {
 		String avail;
-
 		if (status == false) {
 			avail = "Pending";
 		} else {
