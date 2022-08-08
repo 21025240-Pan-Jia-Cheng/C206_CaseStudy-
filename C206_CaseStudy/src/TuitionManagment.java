@@ -1,160 +1,103 @@
-/**
- * 
- */
-
-/**
- * @author 21008790
- *
- */
 import java.util.ArrayList;
+//By 21021888- Koh Wee Ren
 public class TuitionManagment {
-
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		ArrayList<Student> studentList = new ArrayList<Student>();
+	int option = 0;
+	
+	ArrayList<timetable> timetableList = new ArrayList<timetable>();
+	while (option != 4) { 
 
-		studentList.add(new Student("Tricia", "female", "92235939", "triciawong19@gmail.com", "03/11/2002", "singapore",
-				"shopping"));
-		studentList.add(new Student("Aricia", "female", "92202937", "ariciawong04@gmail.com", "11/01/2002", "singapore",
-				"running"));
-		studentList.add(new Student("Tommy", "male", "97332937", "tommy@gmail.com", "04/01/2002", "singapore",
-				"running"));
-		
-		
-		int option = 0;
+		TuitionManagment.menu();
+		option = Helper.readInt("Enter an option > ");
 
-		while (option != 4) {
-
-			TuitionManagment.menu();
-			option = Helper.readInt("Enter an option > ");
-
-			if (option == 1) {
-				// View all items
-				TuitionManagment.viewAllStudent(studentList);
-			
-
-			} else if (option == 2) {
-				// Add student
-				TuitionManagment.setHeader("ADD");			
-				TuitionManagment.setHeader("DETAILS");
-				System.out.println("1. Student");
-
-				
-				int details = Helper.readInt("Enter option to select item type > ");
-
-				if (details == 1) {
-					// Add student
-					Student stu = inputdetails();
-					TuitionManagment.addStudent(studentList, stu );
-					System.out.println("Student added");
-
-				} else {
-					System.out.println("Invalid details");
-				}
-
-			} else if (option == 3) {
-				// delete student
-				TuitionManagment.setHeader("DELETE");			
-				TuitionManagment.setHeader("DELETE STUDENTS");
-				System.out.println("1. student");
-		
-				int itemType = Helper.readInt("Enter option to select item type > ");
-
-				if (itemType == 1) {
-					// delete students
-					TuitionManagment.deletestudent(studentList);
-		
-				} else {
-					System.out.println("Invalid type");
-				}
-
-			
-			} else if (option == 4) {
-				System.out.println("Bye!");
-			} else {
-				System.out.println("Invalid option");
-			}
-
+		if (option == 1) {
+			TuitionManagment.viewAlltimetable(timetableList);
+		} else if (option == 2) {
+			timetable tt = inputtimetable();
+			TuitionManagment.addtimetable(timetableList, tt);
+		} else if (option == 3) {
+			String dt = Helper.readString("Enter the tuition timetable id that you want to delete > ");
+			TuitionManagment.deletetimetable(timetableList,dt);
+		} else if (option == 4) {
+			System.out.println("Bye!");
+		} else {
+			System.out.println("Invalid option");
 		}
 
 	}
-
+	}
 	public static void menu() {
-		TuitionManagment.setHeader("TUTION MANAGMENT");
-		System.out.println("1. Display Students");
-		System.out.println("2. Add Students");
-		System.out.println("3. Delete Students");
+		TuitionManagment.setHeader("TUITION APP");
+		System.out.println("1. View tuition timetable");
+		System.out.println("2. Add tuition timetable");
+		System.out.println("3. Delete tuition timetable");
 		System.out.println("4. Quit");
 		Helper.line(80, "-");
 
 	}
-	
 	public static void setHeader(String header) {
-		Helper.line(130, "-");
+		Helper.line(80, "-");
 		System.out.println(header);
-		Helper.line(130, "-");
+		Helper.line(80, "-");
 	}
-
-//======================================= Option 1 View students =================================
-	public static String retrieveAllstudent(ArrayList<Student> studentList) {
+public static String retrieveAlltimetable(ArrayList<timetable> timetableList) {
 		String output = "";
 
-		for (int i = 0; i < studentList.size(); i++) {
+		for (int i = 0; i < timetableList.size(); i++) {
 
-			output += String.format("%-10s %-10s %-10s %-30s %-20s %-20s %-20s\n", studentList.get(i).getName(),
-					studentList.get(i).getGender(),
-					studentList.get(i).getMobile(),
-					studentList.get(i).getEmail(),
-					studentList.get(i).getDateofBirth(),
-					studentList.get(i).getCountry(),
-					studentList.get(i).getInterest());
+			output += String.format("%-84s\n", timetableList.get(i).toString()); 
 		}
 		return output;
 	}
-	public static void viewAllStudent(ArrayList<Student> studentList) {
-		TuitionManagment.setHeader("STUDENT LIST");
-		String output = String.format("%-10s %-10s %-10s %-30s %-20s %-20s %-20s\n", "NAME", "GENDER",
-				"MOBILE", "EMAIL","DATE OF BIRTH", "COUNTRY", "INTEREST");
-		 output += retrieveAllstudent(studentList);	
-		System.out.println(output);
+	
+public static void viewAlltimetable(ArrayList<timetable> timetableList) {
+	TuitionManagment.setHeader("TIMETABLE LIST");
+	String output = String.format("%-10s %-10s %-20s %-20s %-20s\n", "ID", "PRICE",
+			"START DATE", "END DATE","MODE");
+	output += 	retrieveAlltimetable(timetableList);
+	System.out.println(output);
 	}
 
-	//================================= Option 2 Add an item (CRUD - Create) =================================
-	public static Student inputdetails() {
-		String name = Helper.readString("Enter your name > ");
-		String gender = Helper.readString("Enter your gender > ");
-		String mobile = Helper.readString("Enter your mobile number > ");
-		String email = Helper.readString("Enter your email > ");
-		String dateofBirth = Helper.readString("Enter your birthday > ");
-		String country = Helper.readString("Enter your country residence > ");
-		String interest = Helper.readString("Enter your interest > ");
-		
-		 Student stu= new Student(name, gender, mobile, email, dateofBirth, country, interest);
-		return stu;
-		
-	}
-	public static void addStudent(ArrayList<Student> studentList, Student stu) {
-		
-		studentList.add(stu);
-	}
+public static timetable inputtimetable() {
+	timetable tt = null;
+	String id = Helper.readString("Enter tuition timetable id > ");
+	double price = Helper.readDouble("Enter the price > ");
+	String startdate = Helper.readString("Enter the start date > ");
+	String enddate = Helper.readString("Enter the end date > ");
+	String mode = Helper.readString("Enter the mode type > ");
+	tt = new timetable(id, price, startdate,enddate, mode);
+	return tt;
 	
-	//================================= Option 3 delete students (CRUD - Update) =================================
-		public static boolean deletestudent(ArrayList<Student> studentList) {
-			
-			boolean isDeleted = false;
-			String email = Helper.readString("Enter your email > ");
-			for (int i = 0; i < studentList.size(); i++) {
-				if (studentList.get(i).getEmail().contentEquals(email)) {
-					studentList.remove(i);
-				}
-					
-					isDeleted = true;
-					
-				}
-			return isDeleted;
+}	
+public static boolean addtimetable(ArrayList<timetable> timetableList, timetable tt) {
+	boolean unique = true;
+	for (timetable i : timetableList) {
+		if (i.getId().contentEquals(tt.getId())) {
+			System.out.println("Error! This tuition ID is duplicated");
+			unique = false;
 		}
+	}
+	if (unique == true){
+		timetableList.add(tt);
+		System.out.println("This tuition ID is now added");
+	}
+	return unique;
+}
+
+public static boolean deletetimetable(ArrayList<timetable> timetableList, String dt) {
+	boolean deleted = false;
+	for (int i = 0; i < timetableList.size(); i++) {
+		String var = timetableList.get(i).getId();
+		if (var.contentEquals(dt)){
+			timetableList.remove(i);
+			System.out.println("Tuition timetable with ID " + var + " was deleted");
+			deleted = true;
+			}
+	}
+	if (deleted == false) {
+		System.out.println("Invalid timetable ID was input.");
+		}
+	return deleted;
+	}
 }
