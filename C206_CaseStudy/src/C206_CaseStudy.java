@@ -5,20 +5,22 @@ public class C206_CaseStudy {
 	private static final int OPTION_DELETE = 3;
 	private static final int OPTION_ADD = 2;
 	private static final int OPTION_VIEW = 1;
-	private static final int OPTION_QUIT = 4;
+	private static final int OPTION_RETURN = 4;
+	private static final int OPTION_QUIT = 6;
 
 	public static void main(String[] args) {
 		int call = 0;
-		C206_CaseStudy.mainmenu();
-		call = Helper.readInt("Enter menu to call > ");
 		
+while (call != OPTION_QUIT) {
+	C206_CaseStudy.mainmenu();
+	call = Helper.readInt("Enter menu to call > ");
 	if (call == 1) {
 		//Start -H
 		ArrayList<Tuition> registrationList = new ArrayList<Tuition>();
 		
 		int option = 0;
 		
-		while (option != OPTION_QUIT) {
+		while (option != OPTION_RETURN) {
 			C206_CaseStudy.menu1();
 			option = Helper.readInt("Enter an option > ");
 			
@@ -34,18 +36,20 @@ public class C206_CaseStudy {
 				
 			} else if (option == OPTION_DELETE) {
 				C206_CaseStudy.deleteRegistration(registrationList);
-			} else if (option == OPTION_QUIT) {
-				System.out.println("Thank you for registering in the tuition management system! =)");
+			} else if (option == OPTION_RETURN) {
+				
 			} else {
 				System.out.println("Invalid option!");
 			}
 		}
+	}if (call == OPTION_QUIT) {
+		System.out.println("Thank you for using the Tuition Management System! =)");
 	}
 	//===============================================By Wee Ren===============================================================================>>
 	else if (call == 2) {
 	int option = 0;
 	ArrayList<timetable> timetableList = new ArrayList<timetable>();
-	while (option != OPTION_QUIT) { 
+	while (option != OPTION_RETURN) { 
 		
 		C206_CaseStudy.menu2();
 		option = Helper.readInt("Enter an option > ");
@@ -58,7 +62,7 @@ public class C206_CaseStudy {
 		} else if (option == OPTION_DELETE) {
 			String dt = Helper.readString("Enter the tuition timetable id that you want to delete > ");
 			C206_CaseStudy.deletetimetable(timetableList,dt);
-		} else if (option == OPTION_QUIT) {
+		} else if (option == OPTION_RETURN) {
 			System.out.println("Bye!");
 		} else {
 			System.out.println("Invalid option");
@@ -104,12 +108,12 @@ public class C206_CaseStudy {
 			}
 		}
 	}
-	
+
 //=====================================================End by JC=======================================================================
-	else if (call == 4) {
-		ArrayList<TuitionClass> tuitionList = new ArrayList<TuitionClass>();
-		tuitionList.add(new TuitionClass("t0001", "Mathematics Class", "Mathematics", "Interesting Math lessons that teaches algebra", "08:00 - 10:00", true, "Ms Mango"));
-		tuitionList.add(new TuitionClass("t0002", "English Class", "English", "Fun English lessons that teaches tenses", "07:00 - 9:00", true, "Mr Watermelon"));
+	/*else if (call == 4) {
+		ArrayList<Tuition> tuitionList = new ArrayList<Tuition>();
+		tuitionList.add(new Tuition("t0001", "Mathematics Class", "Mathematics", "Interesting Math lessons that teaches algebra", "08:00 - 10:00", true, "Ms Mango"));
+		tuitionList.add(new Tuition("t0002", "English Class", "English", "Fun English lessons that teaches tenses", "07:00 - 9:00", true, "Mr Watermelon"));
 		
 		int option = 0;
 
@@ -120,7 +124,7 @@ public class C206_CaseStudy {
 
 			if (option == 1) {
 				// add tuition
-				TuitionClass tui01 = inputTuition();
+				Tuition tui01 = inputTuition();
 				C206_CaseStudy.setHeader("ADD");
 				C206_CaseStudy.addTuition(tuitionList, tui01);
 			}
@@ -144,7 +148,7 @@ public class C206_CaseStudy {
 				System.out.println("Invalid option");
 			}
 		}
-	}
+	}*/
 //=====================================================End by Joleen=======================================================================
 	//Start of Tricia's code
 	else if(call == 5) {
@@ -210,32 +214,40 @@ public class C206_CaseStudy {
 			}
 
 		}
-
+	}
 	}
 //=====================================================End by Tricia=======================================================================
+	}
+
+
+	/**
+	 * @return
+	 */
+	public static int OPTION_QUIT() {
+		return 6;
 	}
 	
 	
 	//BIG MENU
 	public static void mainmenu() {
 		C206_CaseStudy.setHeader("TUITION APP");
-		System.out.println("1. Manage Tuition Timetable");
-		System.out.println("2. Manage Tuition Registration");
+		System.out.println("1. Manage Tuition Registration");
+		System.out.println("2. Manage Tuition Timetable");
 		System.out.println("3. Manage Tuition Enquiry");
 		System.out.println("4. Manage Tuition");
 		System.out.println("5. Manage Student Details");
-		System.out.println("6. Quit");
+		System.out.println("6. Return");
 		Helper.line(80, "-");
 	}
 	//End of BIG MENU
 	
 	//Start of Wee Ren's Code
-	public static void menu1() {
+	public static void menu2() {
 		C206_CaseStudy.setHeader("TUITION APP");
 		System.out.println("1. View tuition timetable");
 		System.out.println("2. Add tuition timetable");
 		System.out.println("3. Delete tuition timetable");
-		System.out.println("4. Quit");
+		System.out.println("4. Return");
 		Helper.line(80, "-");
 
 	}
@@ -305,14 +317,14 @@ public static boolean deletetimetable(ArrayList<timetable> timetableList, String
 }
 //===============================================End By Wee Ren===============================================================================>>
 //Start by Heather's code
-public static void menu2() {
+public static void menu1() {
 	Helper.line(50, "=");
 	System.out.println("TUITION MANAGEMENT SYSTEM");
 	Helper.line(50, "=");
 	System.out.println("1. View all registrations");
 	System.out.println("2. Register for a tuition");
 	System.out.println("3. Cancel registration");
-	System.out.println("4. Quit");
+	System.out.println("4. Return");
 	Helper.line(50, "=");
 }
 
@@ -387,7 +399,7 @@ public static void menu() {
 	System.out.println("1. View enquiry");
 	System.out.println("2. Add enquiry");
 	System.out.println("3. Delete enquiry");
-	System.out.println("4. Quit");
+	System.out.println("4. Return");
 	Helper.line(80, "-");
 
 }
@@ -453,13 +465,13 @@ public static void menu() {
 			  return doesDelete;
 	}
 //===============================================End By JC===============================================================================>>
-//Start of Joleen's Code
+/*Start of Joleen's Code
 	public static void tuitionMenu() {
 		C206_CaseStudy.setHeader("TUITION CENTRE APP");
 		System.out.println("1. Add tuition");
 		System.out.println("2. View tuition");
 		System.out.println("3. Delete tuition");
-		System.out.println("4. Quit");
+		System.out.println("4. Return");
 		Helper.line(80, "=");
 	}
 
@@ -525,13 +537,13 @@ public static void menu() {
 		}
 	}
 //===============================================End By Joleen===============================================================================>>
-	//start of tricia's code
+*/	//start of tricia's code
 	public static void displaymenu() {
 		C206_CaseStudy.setHeader("TUTION MANAGMENT");
 		System.out.println("1. Display Students");
 		System.out.println("2. Add Students");
 		System.out.println("3. Delete Students");
-		System.out.println("4. Quit");
+		System.out.println("4. Return");	
 		Helper.line(80, "-");
 
 	}
