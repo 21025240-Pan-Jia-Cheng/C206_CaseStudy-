@@ -32,6 +32,7 @@ public class TuitionManagement {
 				
 			} else if (option == OPTION_DELETE) {
 				TuitionManagement.deleteRegistration(registrationList);
+				
 			} else if (option == OPTION_QUIT) {
 				System.out.println("Thank you for registering in the tuition management system! =)");
 			} else {
