@@ -8,8 +8,6 @@ public class C206_CaseStudy {
 	private static final int OPTION_QUIT = 4;
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
 		int call = 0;
 		C206_CaseStudy.mainmenu();
 		call = Helper.readInt("Enter menu to call > ");
@@ -65,21 +63,63 @@ public class C206_CaseStudy {
 		} else {
 			System.out.println("Invalid option");
 		}
-
+		//=====================================================End - H=======================================================================
 		}
 	}
-}
-//=====================================================End - H=======================================================================
+	else if (call == 3) {
+
+		ArrayList<Enquiry> enquiryList = new ArrayList<Enquiry>();
+		
+		enquiryList.add(new Enquiry (1,"Availability of math tuition" , "2/8/2022", "By phone" , "11:11pm" , "Resolved"));
+		enquiryList.add(new Enquiry (2,"English tution timetable" , "3/8/2022", "By email" , "11:59pm" , "Unresolved"));
+		
+		
+		int option = 0;
+
+		while (option != 4) {
+
+			C206_CaseStudy.menu();
+			option = Helper.readInt("Enter an option > ");
+			
+			if (option == 1) {
+				// View all enquiry
+				C206_CaseStudy.viewAllEnquiry(enquiryList);	
+			} else if (option == 2) {
+				// Add a new enquiry
+				C206_CaseStudy.setHeader("ADD");
+				Enquiry e = inputEnquiry();
+				C206_CaseStudy.addEnquiry(enquiryList, e);
+				System.out.println("Enquiry added");
+				
+			} else if (option == 3) { 
+				int searchId = Helper.readInt("Enter enquiry id you want to delete > ");
+				C206_CaseStudy.deleteEnquiry(enquiryList , searchId);
+				System.out.println("Enquiry deleted");
+				
+				
+			} else if (option == 4) {
+				System.out.println("Bye!");
+			} else {
+				System.out.println("Invalid option");
+			}
+		}
+	}
+	}
+//=====================================================End by JC=======================================================================
+	//BIG MENU
 	public static void mainmenu() {
 		C206_CaseStudy.setHeader("TUITION APP");
 		System.out.println("1. Manage Tuition Timetable");
 		System.out.println("2. Manage Tuition Registration");
-		System.out.println("3. Manage ...");
-		System.out.println("4. Manage ...");
-		System.out.println("5. Manage ...");
+		System.out.println("3. Manage Tuition Enquiry");
+		System.out.println("4. Manage Tuition");
+		System.out.println("5. Manage Student Details");
 		System.out.println("6. Quit");
 		Helper.line(80, "-");
 	}
+	//End of BIG MENU
+	
+	//Start of Wee Ren's Code
 	public static void menu1() {
 		C206_CaseStudy.setHeader("TUITION APP");
 		System.out.println("1. View tuition timetable");
@@ -153,7 +193,8 @@ public static boolean deletetimetable(ArrayList<timetable> timetableList, String
 		}
 	return deleted;
 }
-//===============================================By Wee Ren===============================================================================>>
+//===============================================End By Wee Ren===============================================================================>>
+//Start by Heather's code
 public static void menu2() {
 	Helper.line(50, "=");
 	System.out.println("TUITION MANAGEMENT SYSTEM");
@@ -225,7 +266,80 @@ public static void deleteRegistration(ArrayList<Tuition> registrationList) {
 	}
 	if (isDelete == false) {
 		System.out.println("Invalid Registration No.");
-		}
+		
 	}
 }
-//===============================================By Heather===============================================================================>>
+//===============================================End By Heather===============================================================================>>
+
+//Start -JC
+public static void menu() {
+	C206_CaseStudy.setHeader("Tuition Management System");
+	System.out.println("1. View enquiry");
+	System.out.println("2. Add enquiry");
+	System.out.println("3. Delete enquiry");
+	System.out.println("4. Quit");
+	Helper.line(80, "-");
+
+}
+
+
+	
+	//================================= Option 1 View items (CRUD- Read) =================================
+	public static String retrieveAllEnquiry(ArrayList<Enquiry> enquiryList) {
+		String output = "";
+
+		for (int i = 0; i < enquiryList.size(); i++) {
+
+			output += String.format("%-15d %-30s %-25s %-25s %-25s %-25s\n", enquiryList.get(i).getEnquiry_id(),
+					enquiryList.get(i).getTitle(), enquiryList.get(i).getDate() , enquiryList.get(i).getMethod(),
+					enquiryList.get(i).getTime() , enquiryList.get(i).getStatus());
+		}
+		return output;
+	}
+	public static void viewAllEnquiry(ArrayList<Enquiry> enquiryList) {
+		C206_CaseStudy.setHeader("ENQUIRY LIST");
+		String output = String.format("%-15s %-30s %-25s %-25s %-25s %-25s\n", "ENQUIRY ID", "TITLE", "DATE" , 
+				"METHOD" , "TIME" , "STATUS");
+		 output += retrieveAllEnquiry(enquiryList);	
+		System.out.println(output);
+	}
+
+	//================================= Option 2 Add (CRUD - Create)=================================
+	public static Enquiry inputEnquiry() {
+		int id = Helper.readInt("Enter enquiry id > ");  
+		String title = Helper.readString("Enter title > ");
+		String date = Helper.readString("Enter date > ");
+		String method = Helper.readString("Enter method > ");
+		String time = Helper.readString("Enter time > ");
+		String status = Helper.readString("Enter status > ");
+
+		Enquiry e = new Enquiry(id, title, date , method , time , status);
+		
+		return e;
+		
+	}
+	
+	
+	public static void addEnquiry(ArrayList<Enquiry> enquiryList, Enquiry e) {
+		
+		enquiryList.add(e);
+		
+	}
+	public static boolean deleteEnquiry(ArrayList<Enquiry> enquiryList, int searchId ) {
+		boolean doesDelete = false;
+		
+		
+		for (int i = 0; i < enquiryList.size(); i++) { 
+			int enquiryID = enquiryList.get(i).getEnquiry_id();
+			   if (enquiryID == searchId) { 
+				   enquiryList.remove(enquiryList.get(i)); 
+			    System.out.println("Enquiry id " + searchId + " deleted!"); 
+			    doesDelete = true; 
+			   } 
+			  } 
+			  if (doesDelete == false) { 
+			   System.out.println("Invalid enquiry id."); 
+			  } 
+			  return doesDelete;
+	}
+}
