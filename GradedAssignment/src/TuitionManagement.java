@@ -102,7 +102,6 @@ public class TuitionManagement {
 		
 		boolean isDelete = false;
 		
-		
 		for (int i = 0; i < registrationList.size(); i++) {
 			if (registrationList.get(i).getRegistrationNo() == registrationNo) {
 				registrationList.remove(registrationList.get(i));
