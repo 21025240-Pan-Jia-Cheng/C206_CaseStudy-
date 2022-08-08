@@ -21,7 +21,7 @@ while (call != OPTION_QUIT) {
 		int option = 0;
 		
 		while (option != OPTION_RETURN) {
-			C206_CaseStudy.menu1();
+			C206_CaseStudy.registrationmenu();
 			option = Helper.readInt("Enter an option > ");
 			
 			if (option == OPTION_VIEW) {
@@ -51,7 +51,7 @@ while (call != OPTION_QUIT) {
 	ArrayList<timetable> timetableList = new ArrayList<timetable>();
 	while (option != OPTION_RETURN) { 
 		
-		C206_CaseStudy.menu2();
+		C206_CaseStudy.timetablemenu();
 		option = Helper.readInt("Enter an option > ");
 
 		if (option == OPTION_VIEW) {
@@ -82,7 +82,7 @@ while (call != OPTION_QUIT) {
 
 		while (option != 4) {
 
-			C206_CaseStudy.menu();
+			C206_CaseStudy.enquirymenu();
 			option = Helper.readInt("Enter an option > ");
 			
 			if (option == 1) {
@@ -110,10 +110,10 @@ while (call != OPTION_QUIT) {
 	}
 
 //=====================================================End by JC=======================================================================
-	/*else if (call == 4) {
-		ArrayList<Tuition> tuitionList = new ArrayList<Tuition>();
-		tuitionList.add(new Tuition("t0001", "Mathematics Class", "Mathematics", "Interesting Math lessons that teaches algebra", "08:00 - 10:00", true, "Ms Mango"));
-		tuitionList.add(new Tuition("t0002", "English Class", "English", "Fun English lessons that teaches tenses", "07:00 - 9:00", true, "Mr Watermelon"));
+	else if (call == 4) {
+		ArrayList<TuitionClass> tuitionList = new ArrayList<TuitionClass>();
+		tuitionList.add(new TuitionClass("t0001", "Mathematics Class", "Mathematics", "Interesting Math lessons that teaches algebra", "08:00 - 10:00", true, "Ms Mango"));
+		tuitionList.add(new TuitionClass("t0002", "English Class", "English", "Fun English lessons that teaches tenses", "07:00 - 9:00", true, "Mr Watermelon"));
 		
 		int option = 0;
 
@@ -124,7 +124,7 @@ while (call != OPTION_QUIT) {
 
 			if (option == 1) {
 				// add tuition
-				Tuition tui01 = inputTuition();
+				TuitionClass tui01 = inputTuition();
 				C206_CaseStudy.setHeader("ADD");
 				C206_CaseStudy.addTuition(tuitionList, tui01);
 			}
@@ -148,7 +148,7 @@ while (call != OPTION_QUIT) {
 				System.out.println("Invalid option");
 			}
 		}
-	}*/
+	}
 //=====================================================End by Joleen=======================================================================
 	//Start of Tricia's code
 	else if(call == 5) {
@@ -165,7 +165,7 @@ while (call != OPTION_QUIT) {
 
 		while (option != 4) {
 
-			C206_CaseStudy.menu();
+			C206_CaseStudy.classmenu();
 			option = Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
@@ -236,13 +236,13 @@ while (call != OPTION_QUIT) {
 		System.out.println("3. Manage Tuition Enquiry");
 		System.out.println("4. Manage Tuition");
 		System.out.println("5. Manage Student Details");
-		System.out.println("6. Return");
+		System.out.println("6. Quit");
 		Helper.line(80, "-");
 	}
 	//End of BIG MENU
 	
 	//Start of Wee Ren's Code
-	public static void menu2() {
+	public static void timetablemenu() {
 		C206_CaseStudy.setHeader("TUITION APP");
 		System.out.println("1. View tuition timetable");
 		System.out.println("2. Add tuition timetable");
@@ -317,7 +317,7 @@ public static boolean deletetimetable(ArrayList<timetable> timetableList, String
 }
 //===============================================End By Wee Ren===============================================================================>>
 //Start by Heather's code
-public static void menu1() {
+public static void registrationmenu() {
 	Helper.line(50, "=");
 	System.out.println("TUITION MANAGEMENT SYSTEM");
 	Helper.line(50, "=");
@@ -394,7 +394,7 @@ public static void deleteRegistration(ArrayList<Tuition> registrationList) {
 //===============================================End By Heather===============================================================================>>
 
 //Start -JC
-public static void menu() {
+public static void enquirymenu() {
 	C206_CaseStudy.setHeader("Tuition Management System");
 	System.out.println("1. View enquiry");
 	System.out.println("2. Add enquiry");
@@ -465,7 +465,7 @@ public static void menu() {
 			  return doesDelete;
 	}
 //===============================================End By JC===============================================================================>>
-/*Start of Joleen's Code
+//Start of Joleen's Code
 	public static void tuitionMenu() {
 		C206_CaseStudy.setHeader("TUITION CENTRE APP");
 		System.out.println("1. Add tuition");
@@ -537,8 +537,8 @@ public static void menu() {
 		}
 	}
 //===============================================End By Joleen===============================================================================>>
-*/	//start of tricia's code
-	public static void displaymenu() {
+	//start of tricia's code
+	public static void classmenu() {
 		C206_CaseStudy.setHeader("TUTION MANAGMENT");
 		System.out.println("1. Display Students");
 		System.out.println("2. Add Students");
