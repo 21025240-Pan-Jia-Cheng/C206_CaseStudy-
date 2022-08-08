@@ -21,6 +21,7 @@ public class TuitionManagement {
 			
 			if (option == OPTION_VIEW) {
 				TuitionManagement.viewAllRegistration(registrationList);
+				
 			} else if (option == OPTION_ADD) {
 				Helper.line(50, "-");
 				System.out.println("TUITION REGISTRATION");
