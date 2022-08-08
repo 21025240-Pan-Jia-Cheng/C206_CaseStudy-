@@ -104,8 +104,51 @@ public class C206_CaseStudy {
 			}
 		}
 	}
-	}
+	
 //=====================================================End by JC=======================================================================
+	else if (call == 4) {
+		ArrayList<TuitionClass> tuitionList = new ArrayList<TuitionClass>();
+		tuitionList.add(new TuitionClass("t0001", "Mathematics Class", "Mathematics", "Interesting Math lessons that teaches algebra", "08:00 - 10:00", true, "Ms Mango"));
+		tuitionList.add(new TuitionClass("t0002", "English Class", "English", "Fun English lessons that teaches tenses", "07:00 - 9:00", true, "Mr Watermelon"));
+		
+		int option = 0;
+
+		while (option != 4) {
+
+			tuitionMenu();
+			option = Helper.readInt("Enter an option > ");
+
+			if (option == 1) {
+				// add tuition
+				TuitionClass tui01 = inputTuition();
+				C206_CaseStudy.setHeader("ADD");
+				C206_CaseStudy.addTuition(tuitionList, tui01);
+			}
+
+			else if (option == 2) {
+				// view tuition
+				C206_CaseStudy.viewAllTuition(tuitionList);
+			}
+
+			else if (option == 3) {
+				// delete tuition
+				C206_CaseStudy.setHeader("DELETE");
+				C206_CaseStudy.deleteTuition(tuitionList);
+			}
+
+			else if (option == 4) {
+				System.out.println("Bye");
+			}
+
+			else {
+				System.out.println("Invalid option");
+			}
+		}
+	}
+//=====================================================End by Joleen=======================================================================
+}
+	
+	
 	//BIG MENU
 	public static void mainmenu() {
 		C206_CaseStudy.setHeader("TUITION APP");
@@ -342,4 +385,77 @@ public static void menu() {
 			  } 
 			  return doesDelete;
 	}
+//===============================================End By JC===============================================================================>>
+//Start of Joleen's Code
+	public static void tuitionMenu() {
+		C206_CaseStudy.setHeader("TUITION CENTRE APP");
+		System.out.println("1. Add tuition");
+		System.out.println("2. View tuition");
+		System.out.println("3. Delete tuition");
+		System.out.println("4. Quit");
+		Helper.line(80, "=");
+	}
+
+
+	// Option 1 Add Tuition
+	public static TuitionClass inputTuition() {
+		String tuitionCode = Helper.readString("Enter tuition code > ");
+		String tuitionTitle = Helper.readString("Enter tuition title > ");
+		String subjectGroup = Helper.readString("Enter subject group name > ");
+		String description = Helper.readString("Enter description > ");
+		String duration = Helper.readString("Enter duration > ");
+		Boolean preRequisite = Helper.readBoolean("Enter pre-requisite > ");
+		String teacherInfo = Helper.readString("Enter teacher info > ");
+
+		TuitionClass t = new TuitionClass(tuitionCode, tuitionTitle, subjectGroup, description, duration, preRequisite,teacherInfo);
+		return t;
+	}
+
+	public static void addTuition(ArrayList<TuitionClass> tuitionList, TuitionClass t) {
+		tuitionList.add(t);
+	}
+
+	// Option 2 View Tuition 
+	public static String retrieveAllTuition(ArrayList<TuitionClass>tuitionList) {
+		// set the output as an empty string
+		String output = "";
+		
+		for (int i = 0; i < tuitionList.size(); i++) {
+			output += String.format("%-105s\n", tuitionList.get(i).toString());
+		}
+		return output;
+	}
+	
+	public static void viewAllTuition(ArrayList<TuitionClass>tuitionList) {
+		C206_CaseStudy.setHeader("TUITION LIST");
+		String output = String.format("%-20s %-20s %-20s %-50s %-20s %-20s %-10s\n", "TUITION CODE", "TUITION TITLE", "SUBJECT GROUP NAME", "DESCRIPTION", "DURATION", "PRE-REQUISITE", "TEACHER INFO");
+		output += retrieveAllTuition(tuitionList);
+		System.out.println(output);
+	}
+	
+	// Option 3 Delete Tuition
+	public static TuitionClass inputDeleteTuition() {
+		String tuitionCode = null;
+		String tuitionTitle = null;
+		String subjectGroup = null;
+		String description = null;
+		String duration = null;
+		Boolean preRequisite = null;
+		String teacherInfo = null;
+		
+		TuitionClass t = new TuitionClass(tuitionCode, tuitionTitle, subjectGroup, description, duration, preRequisite, teacherInfo);
+		return t;
+	}
+	
+	public static void deleteTuition(ArrayList<TuitionClass>tuitionList) {
+		String tuition = Helper.readString("Enter tuition to delete > ");
+		for (int i = 0; i < tuitionList.size(); i++) {
+			if (tuitionList.get(i).getTuitionCode().equalsIgnoreCase(tuition)) {
+				tuitionList.remove(i);
+				System.out.println("Tuition deleted");
+				break;
+			}
+		}
+	}
+//===============================================End By Joleen===============================================================================>>
 }
